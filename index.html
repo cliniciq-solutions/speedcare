@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Gateway</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Arial, sans-serif;
+      background: #f3f4f6;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Enhanced responsive padding for better mobile experience */
+    @media (max-width: 320px) {
+      body {
+        padding: 1rem 1rem;
+        /* Ensure adequate padding for rounded corners visibility */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body {
+        padding: 1.25rem 1rem;
+        /* Increased padding to prevent card edge clipping */
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding: 2rem;
+      }
+    }
+
+    /* Logo */
+    .logo {
+      display: block;
+      margin: 0 auto 1rem auto;
+      max-width: 150px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #111827;
+      text-align: center;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    /* Enhanced responsive cards container */
+    @media (max-width: 480px) {
+      .cards {
+        gap: 1.25rem;
+        margin-bottom: 1.5rem;
+        padding: 0 0.5rem;
+        /* Adequate padding to prevent shadow clipping */
+      }
+    }
+
+    @media (min-width: 768px) {
+      .cards {
+        gap: 2rem;
+        margin-bottom: 2.5rem;
+        padding: 0 1rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .cards {
+        gap: 2.5rem;
+        margin-bottom: 3rem;
+        padding: 0 1.5rem;
+      }
+    }
+
+    .card {
+      background: white;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+      width: 250px;
+      text-align: center;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      border: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* Enhanced responsive card styling */
+    @media (max-width: 480px) {
+      .card {
+        padding: 1.5rem;
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .card {
+        padding: 1.75rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .card {
+        padding: 2rem;
+      }
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 4px 8px rgba(0,0,0,0.06);
+    }
+
+    .card h2 {
+      font-size: 1.25rem;
+      margin-bottom: 0.75rem;
+      color: #1f2937;
+      font-weight: 600;
+    }
+
+    .card p {
+      font-size: 0.95rem;
+      color: #6b7280;
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+    }
+
+    .btn {
+      background: #2563eb;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 44px;
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+      letter-spacing: 0.025em;
+    }
+
+    /* Responsive button padding */
+    @media (max-width: 480px) {
+      .btn {
+        padding: 0.875rem 1.25rem;
+        min-height: 48px; /* Larger touch target on mobile */
+      }
+    }
+
+    @media (min-width: 768px) {
+      .btn {
+        padding: 0.75rem 1.75rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .btn {
+        padding: 0.875rem 2rem;
+      }
+    }
+
+    .btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    }
+
+    /* Banner Styling */
+    /* ================= BANNER COMPONENT START ================= */
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center; /* centers logo + text inside banner */
+      width: 100%;
+      max-width: 350px;
+      padding: 0.5rem 1rem;
+      background: white;
+      color: #6b7280; /* grayish text */
+      border: 1px solid #d1d5db;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-family: "Courier New", monospace;
+      font-weight: normal;
+      font-size: 12px;
+      gap: 0.5rem;
+      margin-top: 2rem; /* spacing above banner */
+      transition: background 0.2s ease, transform 0.2s ease;
+      min-height: 44px; /* Ensure touch-friendly size */
+    }
+
+    /* Responsive banner padding */
+    @media (max-width: 480px) {
+      .banner {
+        padding: 0.75rem 1rem;
+        margin-top: 1.5rem;
+        font-size: 11px;
+        min-height: 48px;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .banner {
+        padding: 0.625rem 1.25rem;
+        margin-top: 2.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .banner {
+        padding: 0.75rem 1.5rem;
+        margin-top: 3rem;
+        font-size: 13px;
+      }
+    }
+
+    .banner:hover {
+      background: #f3f4f6;
+      transform: scale(1.02);
+    }
+
+    .banner img {
+      height: 24px;
+      width: auto;
+    }
+    /* ================= BANNER COMPONENT END ================= */
+  </style>
+</head>
+<body>
+  <!-- Logo at the top -->
+  <img src="/logo/logo.png" alt="Company Logo" class="logo">
+<h1>Welcome</h1>
+  <div class="cards">
+    <div class="card">
+      <h2>Survey</h2>
+      <p>How did we do? <br>Share your experience with us.</p>
+      <button class="btn" onclick="location.href='survey.html'">Take Survey</button>
+    </div>
+    <div class="card">
+      <h2>Eligibility</h2>
+      <p>Find out what bulk bill services you may be eligible for.</p>
+      <button class="btn" onclick="location.href='eligibility.html'">Check Eligibility</button>
+    </div>
+  </div>
+  
+  <!-- ================= BANNER COMPONENT START ================= -->
+  <a href="https://cliniciq.com.au" target="_blank" class="banner">
+    <img src="/logo/logo.png" alt="ClinicIQ Logo"> <!-- Logo -->
+    <span>Automation by ClinicIQ Solutions</span> <!-- Text -->
+  </a>
+  <!-- ================= BANNER COMPONENT END ================= -->
+
+</body>
+</html>

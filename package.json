@@ -1,0 +1,15 @@
+{
+  "name": "surveyboss",
+  "version": "1.0.0",
+  "description": "SurveyBoss static web application with Netlify serverless functions",
+  "main": "index.html",
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'No build step required - static site'"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "netlify": {
+    "functions": "netlify/functions"
+  }
+}

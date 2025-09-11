@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Eligibility Checker</title>
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', Arial, sans-serif;
+    background: #f3f4f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    flex-direction: column;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced responsive body padding */
+  @media (max-width: 320px) {
+    body {
+      padding: 1rem;
+      /* Adequate padding for rounded corners visibility */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    body {
+      padding: 1.25rem 1rem;
+      /* Enhanced padding to prevent form edge clipping */
+    }
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      padding: 2rem;
+    }
+  }
+  form {
+    background: white;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+    width: 100%;
+    max-width: 500px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid rgba(0,0,0,0.05);
+  }
+
+  /* Enhanced responsive form styling */
+  @media (max-width: 480px) {
+    form {
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1rem;
+      max-width: calc(100vw - 2rem);
+      margin-left: auto;
+      margin-right: auto;
+      /* Prevent form from touching screen edges */
+    }
+  }
+
+  @media (min-width: 768px) {
+    form {
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 550px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    form {
+      padding: 3rem;
+      margin-bottom: 3rem;
+      max-width: 600px;
+    }
+  }
+  h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1f2937;
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.025em;
+  }
+  .logo {
+    display: block;
+    margin: 0 auto 1rem auto;
+    max-width: 150px;
+    max-height: 50px;
+    object-fit: contain;
+  }
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+    letter-spacing: 0.025em;
+    text-align: left;
+  }
+  input, select {
+    width: 100%;
+    padding: 0.75rem;
+    margin-top: 0.4rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    min-height: 44px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: #fafafa;
+  }
+
+  input:focus, select:focus {
+    outline: none;
+    border-color: #2563eb;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  }
+
+  /* Responsive input padding */
+  @media (max-width: 480px) {
+    input, select {
+      padding: 0.875rem;
+      font-size: 16px; /* Prevent zoom on iOS - must be 16px+ */
+      min-height: 48px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    input, select {
+      padding: 0.875rem 1rem;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    input, select {
+      padding: 1rem;
+      font-size: 16px;
+    }
+  }
+  button {
+    margin-top: 1.5rem;
+    padding: 0.75rem;
+    width: 100%;
+    border: none;
+    border-radius: 0.5rem;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: 44px;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+    letter-spacing: 0.025em;
+  }
+
+  /* Responsive button padding */
+  @media (max-width: 480px) {
+    button {
+      padding: 1rem;
+      margin-top: 1.25rem;
+      min-height: 48px; /* Larger touch target on mobile */
+    }
+  }
+
+  @media (min-width: 768px) {
+    button {
+      padding: 0.875rem;
+      margin-top: 1.75rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    button {
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+  }
+  button:hover {
+    background: #1d4ed8;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(37, 99, 235, 0.3);
+  }
+
+  button:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    background: white;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 1rem;
+    max-width: 700px;
+    position: relative;
+    font-size: 14px;
+    text-align: center; /* center modal content */
+  }
+
+  /* Responsive modal padding */
+  @media (max-width: 480px) {
+    .modal-content {
+      margin: 5% auto;
+      padding: 1.5rem;
+      max-width: calc(100vw - 1.75rem);
+      border-radius: 1rem;
+      /* Ensure modal fits within viewport with padding for rounded corners */
+    }
+  }
+
+  @media (min-width: 768px) {
+    .modal-content {
+      padding: 2.5rem;
+      margin: 8% auto;
+      max-width: 80%;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .modal-content {
+      padding: 3rem;
+      margin: 10% auto;
+      max-width: 750px;
+    }
+  }
+  .close {
+    position: absolute;
+    right: 1rem; top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+    font-size: 14px;
+  }
+
+  /* Responsive table cell padding */
+  @media (max-width: 480px) {
+    th, td {
+      padding: 8px 6px;
+      font-size: 13px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    th, td {
+      padding: 12px;
+      font-size: 15px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    th, td {
+      padding: 14px;
+      font-size: 16px;
+    }
+  }
+  th {
+    background-color: #f4f4f4;
+  }
+  .section-title {
+    margin-top: 20px;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  pre {
+    background: #f4f4f4;
+    padding: 10px;
+    border-radius: 5px;
+    overflow-x: auto;
+  }
+  .spinner {
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid #2563eb;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  /* Clickable conditions box */
+  .conditions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  /* Responsive conditions container padding */
+  @media (max-width: 480px) {
+    .conditions-container {
+      gap: 0.375rem;
+      padding: 0.75rem 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .conditions-container {
+      gap: 0.625rem;
+      padding: 0.625rem 0;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .conditions-container {
+      gap: 0.75rem;
+      padding: 0.75rem 0;
+    }
+  }
+  .condition-item {
+    padding: 0.625rem 1rem;
+    border: 1px solid #d1d5db;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    user-select: none;
+    background: white;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+  }
+
+  /* Enhanced responsive condition item styling */
+  @media (max-width: 480px) {
+    .condition-item {
+      padding: 0.75rem 0.875rem;
+      min-height: 44px;
+      font-size: 0.875rem;
+      border-radius: 0.5rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .condition-item {
+      padding: 0.625rem 0.875rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .condition-item {
+      padding: 0.75rem 1rem;
+    }
+  }
+  .condition-item:hover {
+    background: #f8fafc;
+    border-color: #2563eb;
+    transform: translateY(-1px);
+  }
+
+  .condition-item.selected {
+    background: #2563eb;
+    color: white;
+    border-color: #2563eb;
+    box-shadow: 0 2px 4px rgba(37, 99, 235, 0.2);
+  }
+
+  .condition-item.selected:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+    transform: translateY(-1px);
+  }
+
+  /* Banner Styling */
+  /* ================= BANNER COMPONENT START ================= */
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centers logo + text inside the banner */
+    width: 100%;
+    max-width: 350px;
+    padding: 0.5rem 1rem;
+    background: white;
+    color: #6b7280; /* grayish text */
+    border: 1px solid #d1d5db;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-family: "Courier New", monospace;
+    font-weight: normal;
+    font-size: 12px;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    transition: background 0.2s ease, transform 0.2s ease;
+    min-height: 44px; /* Ensure touch-friendly size */
+  }
+
+  /* Responsive banner padding */
+  @media (max-width: 480px) {
+    .banner {
+      padding: 0.75rem 1rem;
+      margin-bottom: 1.5rem;
+      font-size: 11px;
+      min-height: 48px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .banner {
+      padding: 0.625rem 1.25rem;
+      margin-bottom: 2.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .banner {
+      padding: 0.75rem 1.5rem;
+      margin-bottom: 3rem;
+      font-size: 13px;
+    }
+  }
+  .banner:hover {
+    background: #f3f4f6;
+    transform: scale(1.02);
+  }
+  .banner img {
+    height: 24px;
+    width: auto;
+  }
+  /* ================= BANNER COMPONENT END ================= */
+</style>
+</head>
+<body>
+
+<form id="eligibilityForm">
+  <img src="/logo/logo.png" alt="Company Logo" class="logo">
+  <h2>Check Eligibility</h2>
+
+  <label>Age:
+    <input type="number" name="age" placeholder="Enter your age" required/>
+  </label>
+
+  <label>Conditions (optional, click to select/deselect):</label>
+  <div id="conditionsContainer" class="conditions-container">
+    <div class="condition-item">Diabetes</div>
+    <div class="condition-item">High Cholesterol</div>
+    <div class="condition-item">Cancer</div>
+    <div class="condition-item">Heart Conditions</div>
+    <div class="condition-item">Obesity</div>
+    <div class="condition-item">Smoking</div>
+    <div class="condition-item">COPD</div>
+    <div class="condition-item">Kidney Issues</div>
+    <div class="condition-item">Mental Health Conditions</div>
+    <div class="condition-item">Others</div>
+  </div>
+  <div id="conditionOtherBox" style="display:none; margin-top:0.5rem;">
+    <input type="text" id="conditionOther" placeholder="Please specify other condition(s)"/>
+  </div>
+
+  <label>Ethnicity:
+    <select name="ethnicity" id="ethnicity">
+      <option value="">Select (optional)</option>
+      <option value="Aboriginal/Torres Strait Islander">Aboriginal/Torres Strait Islander</option>
+      <option value="Australian">Australian</option>
+      <option value="Others">Others</option>
+    </select>
+  </label>
+  <div id="ethnicityOtherBox" style="display:none; margin-top:0.5rem;">
+    <input type="text" id="ethnicityOther" placeholder="Please specify other ethnicity"/>
+  </div>
+
+  <label>Email:
+    <input type="email" name="email" placeholder="you@example.com" required/>
+  </label>
+
+  <button type="submit">Submit</button>
+</form>
+
+<!-- Modal -->
+<div id="resultModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modalBody">
+      <div class="spinner"></div>
+      <p>Processing eligibility... please wait.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ================= BANNER COMPONENT START ================= -->
+<a href="https://cliniciq.com.au" target="_blank" class="banner">
+  <img src="/logo/logo.png" alt="ClinicIQ Logo"> <!-- Logo aligned left -->
+  <span>Automation by ClinicIQ Solutions</span> <!-- Text aligned left inside banner -->
+</a>
+<!-- ================= BANNER COMPONENT END ================= -->
+
+<script>
+const modal = document.getElementById("resultModal");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.querySelector(".close");
+const conditionsContainer = document.getElementById("conditionsContainer");
+const conditionOtherBox = document.getElementById("conditionOtherBox");
+const conditionOther = document.getElementById("conditionOther");
+const ethnicitySelect = document.getElementById("ethnicity");
+const ethnicityOtherBox = document.getElementById("ethnicityOtherBox");
+const ethnicityOther = document.getElementById("ethnicityOther");
+
+// Toggle condition items
+const conditionItems = Array.from(conditionsContainer.querySelectorAll(".condition-item"));
+conditionItems.forEach(item => {
+  item.addEventListener("click", () => {
+    item.classList.toggle("selected");
+    // Show other input if "Others" selected
+    const othersSelected = conditionItems.find(i => i.textContent === "Others").classList.contains("selected");
+    conditionOtherBox.style.display = othersSelected ? "block" : "none";
+    if (!othersSelected) conditionOther.value = "";
+  });
+});
+
+// Show/hide Other ethnicity input
+ethnicitySelect.addEventListener("change", () => {
+  ethnicityOtherBox.style.display = ethnicitySelect.value === "Others" ? "block" : "none";
+  if (ethnicitySelect.value !== "Others") ethnicityOther.value = "";
+});
+
+// Modal close
+closeBtn.onclick = () => modal.style.display = "none";
+window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+
+// Render object as HTML table
+function renderObjectAsTable(obj, title = "") {
+  let html = title ? `<div class="section-title">${title}:</div>` : "";
+  html += `<table>`;
+  html += `<tr><th>Field</th><th>Value</th></tr>`;
+  for (const key in obj) {
+    let value = obj[key];
+    if (Array.isArray(value)) value = value.join(", ");
+    else if (typeof value === "object" && value !== null) value = `<pre>${JSON.stringify(value, null, 2)}</pre>`;
+    html += `<tr><td>${key}</td><td>${value}</td></tr>`;
+  }
+  html += `</table>`;
+  return html;
+}
+
+// Convert timestamp to Australian format
+function toAustralianTimestamp(ts) {
+  const date = new Date(ts);
+  return date.toLocaleString("en-AU", {
+    timeZone: "Australia/Sydney",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+}
+
+// Load configuration from serverless function
+let config = null;
+
+async function loadConfig() {
+  try {
+    console.log('Loading config from /api/config...');
+    const response = await fetch('/api/config');
+    console.log('Config response status:', response.status);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+    
+    config = await response.json();
+    console.log('Config loaded successfully:', config);
+    
+    // Check if webhooks are available
+    if (!config.surveyWebhook || !config.eligibilityWebhook) {
+      console.warn('Webhook URLs not available in config:', config);
+    }
+  } catch (error) {
+    console.error('Could not load config from server:', error);
+    console.log('Config service unavailable - webhook URLs not accessible');
+    
+    // Config service unavailable - cannot proceed without webhook URLs
+    console.log('Config service unavailable - webhook access requires serverless functions');
+    config = {
+      error: 'Configuration service unavailable - upgrade Netlify plan for serverless functions',
+      fallbackUsed: false
+    };
+  }
+}
+
+// Form submission
+document.getElementById("eligibilityForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  
+  // Ensure config is loaded
+  if (!config) {
+    await loadConfig();
+  }
+
+  // Check if webhook URL is available
+  if (!config || !config.eligibilityWebhook || config.error) {
+    alert("Service temporarily unavailable. Please check your network connection and try again later.");
+    return;
+  }
+  
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+
+  // Collect selected conditions
+  let selectedConditions = conditionItems.filter(i => i.classList.contains("selected")).map(i => i.textContent);
+  if (selectedConditions.includes("Others") && conditionOther.value.trim()) {
+    const otherConditions = conditionOther.value.split(",").map(c => c.trim());
+    selectedConditions = selectedConditions.filter(c => c !== "Others").concat(otherConditions);
+  }
+  formData.conditions = selectedConditions;
+
+  if (ethnicitySelect.value === "Others" && ethnicityOther.value.trim()) {
+    formData.ethnicity = ethnicityOther.value.trim();
+  }
+
+  formData.timestamp = toAustralianTimestamp(new Date());
+
+  modal.style.display = "block";
+  modalBody.innerHTML = `<div class="spinner"></div><p>Processing eligibility... please wait.</p>`;
+
+  try {
+    const response = await fetch(config.eligibilityWebhook, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(formData)
+    });
+    if (!response.ok) throw new Error("Network response was not ok");
+    const data = await response.json();
+    const payload = Array.isArray(data) && data.length > 0 ? data[0] : null;
+
+    if (!payload || !Array.isArray(payload.services) || payload.services.length === 0) {
+      modalBody.innerHTML = "<div class='section-title'>Eligible Services:</div>No eligible services found.";
+      return;
+    }
+
+    const rows = payload.services.map(s => `
+      <tr>
+        <td>${s.service}</td>
+        <td>${s.description}</td>
+        <td>${s.eligibilityReason}</td>
+      </tr>
+    `).join("");
+
+    let html = `<div class="section-title">Bulk Bill Services you may be eligible for:</div>
+      <table>
+        <tr><th>Service</th><th>Description</th><th>Eligibility Reason</th></tr>
+        ${rows}
+      </table>`;
+
+    html += `<div class="section-title">Total Matches:</div>${payload.services.length}`;
+    html += renderObjectAsTable(formData, "Patient Data");
+
+    modalBody.innerHTML = html;
+
+  } catch (err) {
+    modalBody.innerHTML = "Error checking eligibility: " + err.message;
+  }
+});
+
+// Load config when page loads
+loadConfig();
+</script>
+
+</body>
+</html>
