@@ -634,9 +634,12 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
 
   // Check if webhook URL is available
   if (!config || !config.eligibilityWebhook || config.error) {
+    console.error("Config issue:", config);
     alert("Service temporarily unavailable. Please check your network connection and try again later.");
     return;
   }
+
+  console.log("Using eligibility webhook:", config.eligibilityWebhook);
   
   const formData = Object.fromEntries(new FormData(e.target).entries());
 
@@ -657,13 +660,24 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
   modal.style.display = "block";
   modalBody.innerHTML = `<div class="spinner"></div><p>Processing eligibility... please wait.</p>`;
 
+  console.log("Sending form data:", formData);
+
   try {
     const response = await fetch(config.eligibilityWebhook, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(formData)
     });
-    if (!response.ok) throw new Error("Network response was not ok");
+
+    console.log("Response status:", response.status);
+    console.log("Response headers:", Object.fromEntries(response.headers.entries()));
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Response error:", response.status, response.statusText, errorText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}${errorText ? ' - ' + errorText : ''}`);
+    }
+
     let data = await response.json();
 
     console.log("Raw webhook response:", data);
