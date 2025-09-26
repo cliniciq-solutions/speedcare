@@ -665,16 +665,34 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
     });
     if (!response.ok) throw new Error("Network response was not ok");
     const data = await response.json();
-    const payload = Array.isArray(data) && data.length > 0 ? data[0] : null;
 
-    if (!payload || !Array.isArray(payload.services) || payload.services.length === 0) {
+    console.log("Raw webhook response:", data);
+
+    // Handle response - data is the array, get first element
+    const payload = Array.isArray(data) && data.length > 0 ? data[0] : data;
+
+    console.log("Processed payload:", payload);
+
+    // Check if no match or no services
+    if (!payload) {
+      modalBody.innerHTML = "<div class='section-title'>Eligible Services:</div>No response from eligibility service.";
+      return;
+    }
+
+    if (payload.noMatch === true) {
+      modalBody.innerHTML = "<div class='section-title'>Eligible Services:</div>No eligible services found based on your information.";
+      return;
+    }
+
+    if (!payload.services || !Array.isArray(payload.services) || payload.services.length === 0) {
       modalBody.innerHTML = "<div class='section-title'>Eligible Services:</div>No eligible services found.";
       return;
     }
 
+    // Build services table
     const rows = payload.services.map(s => `
       <tr>
-        <td>${s.service}</td>
+        <td><strong>${s.service}</strong></td>
         <td>${s.description}</td>
         <td>${s.eligibilityReason}</td>
       </tr>
@@ -686,12 +704,19 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
         ${rows}
       </table>`;
 
-    html += `<div class="section-title">Total Matches:</div>${payload.services.length}`;
-    html += renderObjectAsTable(formData, "Patient Data");
+    html += `<div class="section-title">Total Matches: ${payload.services.length}</div>`;
+
+    // Show patient data from the response if available
+    if (payload.patientData) {
+      html += renderObjectAsTable(payload.patientData, "Your Information");
+    } else {
+      html += renderObjectAsTable(formData, "Your Information");
+    }
 
     modalBody.innerHTML = html;
 
   } catch (err) {
+    console.error("Error processing eligibility:", err);
     modalBody.innerHTML = "Error checking eligibility: " + err.message;
   }
 });
