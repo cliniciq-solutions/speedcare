@@ -668,15 +668,10 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
 
   console.log("Sending form data:", formData);
 
-  // Enhanced headers with multiple potential formats the API might expect
+  // Simplified headers to avoid undefined values
   const requestHeaders = {
     "Content-Type": "application/json",
-    "eligibleservices": "true",
-    "eligible-services": "true",  // kebab-case variant
-    "x-eligible-services": "true", // x-header variant
-    "Authorization": "Bearer eligible", // potential auth header
-    "Cache-Control": "no-cache", // prevent caching issues
-    "User-Agent": "SurveyBoss-Eligibility/1.0"
+    "eligibleservices": "true"
   };
 
   console.log("Request headers being sent:", requestHeaders);
