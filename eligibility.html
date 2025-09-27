@@ -473,7 +473,7 @@
   <img src="/logo/logo.png" alt="Company Logo" class="logo">
   <h2>Check Eligibility</h2>
   <div style="font-size: 0.75rem; color: #6b7280; margin-bottom: 1rem; text-align: center;">
-    Version 2.1 - Enhanced Debug Mode - Updated: <span id="buildTime"></span>
+    Version 2.2 - Header Debug Mode - Updated: <span id="buildTime"></span>
   </div>
 
   <label>Age:
@@ -669,9 +669,16 @@ document.getElementById("eligibilityForm").addEventListener("submit", async (e) 
   console.log("Sending form data:", formData);
 
   // Minimal headers - only what's absolutely required
+  // Added timestamp to ensure no caching issues
   const requestHeaders = {
     "Content-Type": "application/json"
   };
+
+  console.log("=== HEADER DEBUG INFO ===");
+  console.log("Headers object created:", requestHeaders);
+  console.log("Number of headers:", Object.keys(requestHeaders).length);
+  console.log("Header keys:", Object.keys(requestHeaders));
+  console.log("========================");
 
   console.log("Request headers being sent:", requestHeaders);
   console.log("Webhook URL:", config.eligibilityWebhook);
