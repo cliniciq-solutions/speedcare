@@ -4,13 +4,16 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <title>Survey</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <style>
   * {
     box-sizing: border-box;
   }
 
   body {
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     background: #FFFFFF;
     display: flex;
     justify-content: center;
@@ -51,15 +54,16 @@
     }
   }
   form {
-    background: #FFFBFE;
+    background: #F8FAFC;
     padding: 2rem;
     border-radius: 1.75rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
     width: 100%;
     max-width: 450px;
     text-align: center;
     margin-bottom: 2rem;
-    border: none;
+    border: 1px solid #E2E8F0;
+    position: relative;
   }
 
   /* Enhanced responsive form styling */
@@ -99,7 +103,7 @@
   }
   h2 {
     margin-bottom: 1.5rem;
-    color: #1C1B1F;
+    color: #1E293B;
     font-weight: 400;
     font-size: 1.5rem;
     letter-spacing: 0;
@@ -109,7 +113,7 @@
     margin-top: 1rem;
     font-weight: 500;
     text-align: left;
-    color: #49454F;
+    color: #475569;
     font-size: 0.875rem;
     letter-spacing: 0.1px;
   }
@@ -117,23 +121,23 @@
     width: 100%;
     padding: 0.75rem 1rem;
     margin-top: 0.4rem;
-    border: 1px solid #79747E;
-    border-radius: 0.25rem;
+    border: 1px solid #94A3B8;
+    border-radius: 0.75rem;
     font-size: 1rem;
     box-sizing: border-box;
-    min-height: 44px;
+    height: 44px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    background: transparent;
-    color: #1C1B1F;
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   }
 
   input:focus, textarea:focus {
     outline: none;
-    border-color: #6750A4;
+    border-color: #3B82F6;
     border-width: 2px;
-    padding: calc(0.75rem - 1px) calc(1rem - 1px);
-    background: transparent;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
   }
 
   /* Responsive input padding */
@@ -141,23 +145,27 @@
     input, textarea {
       padding: 0.875rem;
       font-size: 16px; /* Prevent zoom on iOS */
-      min-height: 48px;
+      height: 48px;
     }
   }
 
   @media (min-width: 768px) {
     input, textarea {
       padding: 0.875rem 1rem;
+      height: 48px;
     }
   }
 
   @media (min-width: 1024px) {
     input, textarea {
       padding: 1rem;
+      height: 52px;
     }
   }
   textarea {
     resize: vertical;
+    min-height: 100px;
+    height: auto;
   }
   button {
     margin-top: 1.5rem;
@@ -165,14 +173,14 @@
     width: 100%;
     border: none;
     border-radius: 6.25rem;
-    background: #6750A4;
+    background: #3B82F6;
     color: #FFFFFF;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.2s ease;
     min-height: 44px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
     letter-spacing: 0.1px;
     text-transform: uppercase;
   }
@@ -201,14 +209,14 @@
     }
   }
   button:hover {
-    background: #7965AF;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
     transform: scale(1.02);
   }
 
   button:active {
-    background: #5E4C8F;
-    box-shadow: none;
+    background: #1D4ED8;
+    box-shadow: 0 2px 4px rgba(59,130,246,0.2);
   }
 
   .stars {
@@ -271,7 +279,7 @@
     background: #D8F3DC;
     border: none;
     padding: 1rem;
-    border-radius: 0.75rem;
+    border-radius: 1rem;
     color: #1B5E20;
     font-weight: 500;
   }
@@ -280,7 +288,7 @@
   @media (max-width: 480px) {
     .success-message {
       padding: 1.25rem;
-      border-radius: 0.75rem;
+      border-radius: 1rem;
     }
   }
 
@@ -296,6 +304,50 @@
     }
   }
 
+  /* Back Button Styling */
+  .back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6.25rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .back-button:hover {
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+    transform: scale(1.02);
+  }
+
+  .back-button:active {
+    background: #1D4ED8;
+    box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+  }
+
+  /* Responsive back button */
+  @media (max-width: 480px) {
+    .back-button {
+      padding: 0.625rem 0.875rem;
+      font-size: 0.875rem;
+      min-height: 44px;
+      top: 0.75rem;
+      left: 0.75rem;
+    }
+  }
+
   /* ================= BANNER COMPONENT START ================= */
   .banner {
     display: flex;
@@ -304,16 +356,16 @@
     width: 100%;
     max-width: 350px;
     padding: 0.5rem 1rem;
-    background: #E8DEF8;
-    color: #1D192B; /* Material 3 on-secondary-container */
-    border: none;
-    border-radius: 0.75rem;
+    background: #EFF6FF;
+    color: #1E293B;
+    border: 1px solid #DBEAFE;
+    border-radius: 1rem;
     text-decoration: none;
-    font-family: "Courier New", monospace;
-    font-weight: normal;
+    font-family: "Ubuntu", monospace;
+    font-weight: 400;
     font-size: 12px;
     gap: 0.5rem;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     min-height: 44px; /* Ensure touch-friendly size */
   }
 
@@ -339,7 +391,8 @@
     }
   }
   .banner:hover {
-    background: #D6C3F0;
+    background: #DBEAFE;
+    border-color: #3B82F6;
     transform: scale(1.02);
   }
   .banner img {
@@ -352,8 +405,8 @@
 <body>
 
 <form id="surveyForm">
+  <a href="index.html" class="back-button">← Back</a>
   <img src="/logo/cliniciq-logo.webp" alt="Company Logo" class="logo">
-  <h2>Survey</h2>
 
   <div class="stars" id="stars">
     <span class="star" data-value="1">★</span>
@@ -382,6 +435,7 @@
   <span>Automation by ClinicIQ Solutions</span>
 </a>
 <!-- ================= BANNER COMPONENT END ================= -->
+
 
 <script>
 const stars = document.querySelectorAll(".star");

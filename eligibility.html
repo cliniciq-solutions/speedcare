@@ -7,13 +7,16 @@
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
 <style>
   * {
     box-sizing: border-box;
   }
 
   body {
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
     background: #FFFFFF;
     display: flex;
     justify-content: center;
@@ -54,15 +57,16 @@
     }
   }
   form {
-    background: #FFFBFE;
+    background: #F8FAFC;
     padding: 2rem;
     border-radius: 1.75rem;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
     width: 100%;
     max-width: 500px;
     margin-bottom: 2rem;
     text-align: center;
-    border: none;
+    border: 1px solid #E2E8F0;
+    position: relative;
   }
 
   /* Enhanced responsive form styling */
@@ -96,7 +100,7 @@
   h2 {
     margin-bottom: 1.5rem;
     text-align: center;
-    color: #1C1B1F;
+    color: #1E293B;
     font-weight: 400;
     font-size: 1.5rem;
     letter-spacing: 0;
@@ -113,7 +117,7 @@
     margin-top: 1rem;
     font-size: 0.875rem;
     font-weight: 500;
-    color: #49454F;
+    color: #475569;
     letter-spacing: 0.1px;
     text-align: left;
   }
@@ -121,23 +125,23 @@
     width: 100%;
     padding: 0.75rem 1rem;
     margin-top: 0.4rem;
-    border: 1px solid #79747E;
-    border-radius: 0.25rem;
+    border: 1px solid #94A3B8;
+    border-radius: 0.75rem;
     font-size: 1rem;
     box-sizing: border-box;
-    min-height: 44px;
+    height: 44px;
     transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
-    background: transparent;
-    color: #1C1B1F;
-    font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   }
 
   input:focus, select:focus {
     outline: none;
-    border-color: #6750A4;
+    border-color: #3B82F6;
     border-width: 2px;
-    padding: calc(0.75rem - 1px) calc(1rem - 1px);
-    background: transparent;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
   }
 
   /* Responsive input padding */
@@ -145,7 +149,7 @@
     input, select {
       padding: 0.875rem;
       font-size: 16px; /* Prevent zoom on iOS - must be 16px+ */
-      min-height: 48px;
+      height: 48px;
     }
   }
 
@@ -153,13 +157,63 @@
     input, select {
       padding: 0.875rem 1rem;
       font-size: 15px;
+      height: 48px;
     }
   }
 
   @media (min-width: 1024px) {
-    input, select {
+    input, select, .other-input {
       padding: 1rem;
       font-size: 16px;
+      height: 52px;
+    }
+  }
+
+  /* Ensure other inputs inherit the same styling */
+  .other-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #94A3B8;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    height: 44px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    background: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+
+  .other-input:focus {
+    outline: none;
+    border-color: #3B82F6;
+    border-width: 2px;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+
+  /* Responsive other inputs */
+  @media (max-width: 480px) {
+    .other-input {
+      padding: 0.875rem;
+      font-size: 16px;
+      height: 48px;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .other-input {
+      padding: 0.875rem 1rem;
+      font-size: 15px;
+      height: 48px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .other-input {
+      padding: 1rem;
+      font-size: 16px;
+      height: 52px;
     }
   }
   button {
@@ -168,14 +222,14 @@
     width: 100%;
     border: none;
     border-radius: 6.25rem;
-    background: #6750A4;
+    background: #3B82F6;
     color: #FFFFFF;
     cursor: pointer;
     font-size: 0.875rem;
     font-weight: 500;
     transition: all 0.2s ease;
     min-height: 44px;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
     letter-spacing: 0.1px;
     text-transform: uppercase;
   }
@@ -203,14 +257,14 @@
     }
   }
   button:hover {
-    background: #7965AF;
-    box-shadow: 0 1px 3px 1px rgba(0,0,0,0.15), 0 1px 2px rgba(0,0,0,0.3);
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
     transform: scale(1.02);
   }
 
   button:active {
-    background: #5E4C8F;
-    box-shadow: none;
+    background: #1D4ED8;
+    box-shadow: 0 2px 4px rgba(59,130,246,0.2);
   }
 
   /* Modal Styles */
@@ -224,15 +278,16 @@
     background-color: rgba(0,0,0,0.5);
   }
   .modal-content {
-    background: #FFFBFE;
+    background: #F8FAFC;
     margin: 10% auto;
     padding: 2rem;
-    border-radius: 1.75rem;
+    border-radius: 1.5rem;
     max-width: 700px;
     position: relative;
     font-size: 14px;
     text-align: center; /* center modal content */
-    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 1px 3px 1px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
+    border: 1px solid #E2E8F0;
   }
 
   /* Responsive modal padding */
@@ -241,7 +296,7 @@
       margin: 5% auto;
       padding: 1.5rem;
       max-width: calc(100vw - 1.75rem);
-      border-radius: 1rem;
+      border-radius: 1.25rem;
       /* Ensure modal fits within viewport with padding for rounded corners */
     }
   }
@@ -274,11 +329,11 @@
     margin-top: 10px;
   }
   th, td {
-    border: 1px solid #CAC4D0;
+    border: 1px solid #E2E8F0;
     padding: 10px;
     text-align: left;
     font-size: 14px;
-    color: #1C1B1F;
+    color: #1E293B;
   }
 
   /* Responsive table cell padding */
@@ -303,26 +358,27 @@
     }
   }
   th {
-    background-color: #E7E0EC;
-    color: #1C1B1F;
+    background-color: #EFF6FF;
+    color: #1E293B;
     font-weight: 500;
   }
   .section-title {
     margin-top: 20px;
     font-weight: 500;
     font-size: 16px;
-    color: #1C1B1F;
+    color: #1E293B;
   }
   pre {
-    background: #E7E0EC;
+    background: #EFF6FF;
     padding: 10px;
-    border-radius: 8px;
+    border-radius: 0.75rem;
     overflow-x: auto;
-    color: #1C1B1F;
+    color: #1E293B;
+    border: 1px solid #DBEAFE;
   }
   .spinner {
-    border: 4px solid #E7E0EC;
-    border-top: 4px solid #6750A4;
+    border: 4px solid #DBEAFE;
+    border-top: 4px solid #3B82F6;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -364,8 +420,8 @@
   }
   .condition-item {
     padding: 0.625rem 1rem;
-    border: 1px solid #79747E;
-    border-radius: 0.5rem;
+    border: 1px solid #94A3B8;
+    border-radius: 1rem;
     cursor: pointer;
     user-select: none;
     background: transparent;
@@ -377,7 +433,7 @@
     font-size: 0.875rem;
     font-weight: 500;
     text-align: center;
-    color: #1C1B1F;
+    color: #1E293B;
   }
 
   /* Enhanced responsive condition item styling */
@@ -386,7 +442,7 @@
       padding: 0.75rem 0.875rem;
       min-height: 44px;
       font-size: 0.875rem;
-      border-radius: 0.5rem;
+      border-radius: 1rem;
     }
   }
 
@@ -402,21 +458,65 @@
     }
   }
   .condition-item:hover {
-    background: #E8DEF8;
-    border-color: #6750A4;
+    background: #EFF6FF;
+    border-color: #3B82F6;
   }
 
   .condition-item.selected {
-    background: #E8DEF8;
-    color: #1D192B;
-    border-color: #6750A4;
+    background: #EFF6FF;
+    color: #1E293B;
+    border-color: #3B82F6;
     border-width: 2px;
     padding: calc(0.625rem - 1px) calc(1rem - 1px);
   }
 
   .condition-item.selected:hover {
-    background: #D6C3F0;
-    border-color: #6750A4;
+    background: #DBEAFE;
+    border-color: #2563EB;
+  }
+
+  /* Back Button Styling */
+  .back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6.25rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .back-button:hover {
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+    transform: scale(1.02);
+  }
+
+  .back-button:active {
+    background: #1D4ED8;
+    box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+  }
+
+  /* Responsive back button */
+  @media (max-width: 480px) {
+    .back-button {
+      padding: 0.625rem 0.875rem;
+      font-size: 0.875rem;
+      min-height: 44px;
+      top: 0.75rem;
+      left: 0.75rem;
+    }
   }
 
   /* Banner Styling */
@@ -428,17 +528,17 @@
     width: 100%;
     max-width: 350px;
     padding: 0.5rem 1rem;
-    background: #E8DEF8;
-    color: #1D192B; /* Material 3 on-secondary-container */
-    border: none;
-    border-radius: 0.75rem;
+    background: #EFF6FF;
+    color: #1E293B;
+    border: 1px solid #DBEAFE;
+    border-radius: 1rem;
     text-decoration: none;
-    font-family: "Courier New", monospace;
-    font-weight: normal;
+    font-family: "Ubuntu", monospace;
+    font-weight: 400;
     font-size: 12px;
     gap: 0.5rem;
     margin-bottom: 2rem;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
     min-height: 44px; /* Ensure touch-friendly size */
   }
 
@@ -467,7 +567,8 @@
     }
   }
   .banner:hover {
-    background: #D6C3F0;
+    background: #DBEAFE;
+    border-color: #3B82F6;
     transform: scale(1.02);
   }
   .banner img {
@@ -480,8 +581,8 @@
 <body>
 
 <form id="eligibilityForm">
+  <a href="index.html" class="back-button">← Back</a>
   <img src="/logo/cliniciq-logo.webp" alt="Company Logo" class="logo">
-  <h2>Check Eligibility</h2>
 
   <label>Age:
     <input type="number" name="age" placeholder="Enter your age" required/>
@@ -501,7 +602,7 @@
     <div class="condition-item">Others</div>
   </div>
   <div id="conditionOtherBox" style="display:none; margin-top:0.5rem;">
-    <input type="text" id="conditionOther" placeholder="Please specify other condition(s)"/>
+    <input type="text" id="conditionOther" placeholder="Please specify other condition(s)" class="other-input"/>
   </div>
 
   <label>Ethnicity:
@@ -513,7 +614,7 @@
     </select>
   </label>
   <div id="ethnicityOtherBox" style="display:none; margin-top:0.5rem;">
-    <input type="text" id="ethnicityOther" placeholder="Please specify other ethnicity"/>
+    <input type="text" id="ethnicityOther" placeholder="Please specify other ethnicity" class="other-input"/>
   </div>
 
   <label>Email:
@@ -540,6 +641,7 @@
   <span>Automation by ClinicIQ Solutions</span> <!-- Text aligned left inside banner -->
 </a>
 <!-- ================= BANNER COMPONENT END ================= -->
+
 
 <script>
 const modal = document.getElementById("resultModal");
