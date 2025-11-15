@@ -278,7 +278,7 @@
     background-color: rgba(0,0,0,0.5);
   }
   .modal-content {
-    background: #F8FAFC;
+    background: #FFFFFF;
     margin: 10% auto;
     padding: 2rem;
     border-radius: 1.5rem;
@@ -420,11 +420,11 @@
   }
   .condition-item {
     padding: 0.625rem 1rem;
-    border: 1px solid #94A3B8;
+    border: 2px solid #E2E8F0;
     border-radius: 1rem;
     cursor: pointer;
     user-select: none;
-    background: transparent;
+    background: #FFFFFF;
     transition: all 0.2s ease;
     min-height: 40px;
     display: flex;
@@ -433,7 +433,8 @@
     font-size: 0.875rem;
     font-weight: 500;
     text-align: center;
-    color: #1E293B;
+    color: #64748B;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   }
 
   /* Enhanced responsive condition item styling */
@@ -458,21 +459,27 @@
     }
   }
   .condition-item:hover {
-    background: #EFF6FF;
-    border-color: #3B82F6;
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+    color: #475569;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   }
 
   .condition-item.selected {
-    background: #EFF6FF;
-    color: #1E293B;
-    border-color: #3B82F6;
-    border-width: 2px;
-    padding: calc(0.625rem - 1px) calc(1rem - 1px);
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: #FFFFFF;
+    border-color: #1D4ED8;
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+    border: 2px solid transparent;
   }
 
   .condition-item.selected:hover {
-    background: #DBEAFE;
-    border-color: #2563EB;
+    background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+    box-shadow: 0 8px 16px rgba(59, 130, 246, 0.5);
+    transform: translateY(-3px);
   }
 
   /* Back Button Styling */
