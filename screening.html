@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>NDIS Support Screening</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/png" href="/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Responsive body padding */
+    @media (max-width: 320px) {
+      body {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1.25rem 1rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding: 2rem;
+      }
+    }
+
+    form {
+      background: #F8FAFC;
+      padding: 2rem;
+      border-radius: 1.75rem;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
+      width: 100%;
+      max-width: 600px;
+      margin-bottom: 2rem;
+      text-align: center;
+      border: 1px solid #E2E8F0;
+      position: relative;
+    }
+
+    /* Responsive form styling */
+    @media (max-width: 480px) {
+      form {
+        padding: 1.75rem;
+        margin-bottom: 1.5rem;
+        border-radius: 1rem;
+        max-width: calc(100vw - 2rem);
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+
+    @media (min-width: 768px) {
+      form {
+        padding: 2.5rem;
+        margin-bottom: 2.5rem;
+        max-width: 650px;
+      }
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      text-align: center;
+      color: #1E293B;
+      font-weight: 400;
+      font-size: 1.5rem;
+      letter-spacing: 0;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 1rem auto;
+      max-width: 150px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    label {
+      display: block;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: #475569;
+      letter-spacing: 0.1px;
+      text-align: left;
+    }
+
+    /* Progress Bar */
+    .progress-container {
+      margin-bottom: 1.5rem;
+      padding: 0 1rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: #E2E8F0;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #3B82F6 0%, #2563EB 100%);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      width: 0%;
+    }
+
+    .progress-text {
+      margin-top: 0.5rem;
+      font-size: 0.875rem;
+      color: #64748B;
+      text-align: center;
+    }
+
+    /* Clickable options container */
+    .options-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-top: 0.75rem;
+      padding: 0.5rem 0;
+    }
+
+    .option-item {
+      padding: 0.875rem 1.25rem;
+      border: 2px solid #E2E8F0;
+      border-radius: 1rem;
+      cursor: pointer;
+      user-select: none;
+      background: #FFFFFF;
+      transition: all 0.2s ease;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.875rem;
+      font-weight: 500;
+      text-align: center;
+      color: #64748B;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+
+    .option-item:hover {
+      background: #F8FAFC;
+      border-color: #CBD5E1;
+      color: #475569;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+
+    .option-item.selected {
+      background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+      color: #FFFFFF;
+      border-color: #1D4ED8;
+      font-weight: 600;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+      border: 2px solid transparent;
+    }
+
+    .option-item.selected:hover {
+      background: linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%);
+      box-shadow: 0 8px 16px rgba(59, 130, 246, 0.5);
+      transform: translateY(-3px);
+    }
+
+    /* Input fields */
+    input, select {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      margin-top: 0.5rem;
+      border: 1px solid #94A3B8;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+      height: 48px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      background: #FFFFFF;
+      color: #1E293B;
+      font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #3B82F6;
+      border-width: 2px;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    .other-input {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid #94A3B8;
+      border-radius: 0.75rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+      height: 48px;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      background: #FFFFFF;
+      color: #1E293B;
+      font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    }
+
+    .other-input:focus {
+      outline: none;
+      border-color: #3B82F6;
+      border-width: 2px;
+      background: #FFFFFF;
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+    }
+
+    /* Buttons */
+    button {
+      margin-top: 2rem;
+      padding: 0.875rem;
+      width: 100%;
+      border: none;
+      border-radius: 6.25rem;
+      background: #3B82F6;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 48px;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+      letter-spacing: 0.1px;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background: #2563EB;
+      box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+      transform: scale(1.02);
+    }
+
+    button:active {
+      background: #1D4ED8;
+      box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+    }
+
+    button:disabled {
+      background: #CBD5E1;
+      cursor: not-allowed;
+      transform: none;
+      box-shadow: none;
+    }
+
+    /* Error message */
+    .error-message {
+      color: #DC2626;
+      font-size: 0.875rem;
+      margin-top: 0.5rem;
+      display: none;
+    }
+
+    .error-message.show {
+      display: block;
+    }
+
+    /* Question sections */
+    .question-section {
+      margin-bottom: 2rem;
+      padding: 1rem;
+      border-radius: 1rem;
+      background: #FFFFFF;
+      border: 1px solid #F1F5F9;
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #3B82F6;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6.25rem;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 40px;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-button:hover {
+      background: #2563EB;
+      box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+      transform: scale(1.02);
+    }
+
+    /* Banner */
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 350px;
+      padding: 0.5rem 1rem;
+      background: #EFF6FF;
+      color: #1E293B;
+      border: 1px solid #DBEAFE;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-family: "Ubuntu", monospace;
+      font-weight: 400;
+      font-size: 12px;
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      min-height: 44px;
+    }
+
+    .banner:hover {
+      background: #DBEAFE;
+      border-color: #3B82F6;
+      transform: scale(1.02);
+    }
+
+    .banner img {
+      height: 24px;
+      width: auto;
+    }
+  </style>
+</head>
+<body>
+
+<form id="screeningForm">
+  <a href="index.html" class="back-button">← Back</a>
+  <img src="/logo/cliniciq-logo.webp" alt="Company Logo" class="logo">
+
+  <h2>NDIS Support Services Screening</h2>
+
+  <!-- Progress Bar -->
+  <div class="progress-container">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+    <div class="progress-text" id="progressText">0 of 5 questions answered</div>
+  </div>
+
+  <!-- Question 1: NDIS Support -->
+  <div class="question-section">
+    <label>Are you looking for NDIS support services?</label>
+    <div class="options-container" id="ndisSupportContainer">
+      <div class="option-item" data-value="Yes">Yes</div>
+      <div class="option-item" data-value="No">No</div>
+    </div>
+    <div class="error-message" id="ndisSupportError">Please select an option</div>
+  </div>
+
+  <!-- Question 2: Support Type -->
+  <div class="question-section">
+    <label>What type of support do you need?</label>
+    <div class="options-container" id="supportTypeContainer">
+      <div class="option-item" data-value="In-home personal care">In-home personal care</div>
+      <div class="option-item" data-value="Community access / skill building">Community access / skill building</div>
+      <div class="option-item" data-value="Behaviour support">Behaviour support</div>
+      <div class="option-item" data-value="Supported independent living">Supported independent living</div>
+      <div class="option-item" data-value="Other">Other</div>
+    </div>
+    <div id="supportTypeOtherBox" style="display:none; margin-top:0.75rem;">
+      <input type="text" id="supportTypeOther" placeholder="Please specify other support type" class="other-input"/>
+    </div>
+    <div class="error-message" id="supportTypeError">Please select a support type</div>
+  </div>
+
+  <!-- Question 3: NDIS Plan Status -->
+  <div class="question-section">
+    <label>Do you currently have an NDIS plan?</label>
+    <div class="options-container" id="ndisPlanContainer">
+      <div class="option-item" data-value="Yes">Yes</div>
+      <div class="option-item" data-value="Not yet (still applying)">Not yet (still applying)</div>
+    </div>
+    <div id="planManagementBox" style="display:none; margin-top:1rem;">
+      <label>How is your plan managed?</label>
+      <select name="planManagement" id="planManagement">
+        <option value="">Select management type</option>
+        <option value="Self-managed">Self-managed</option>
+        <option value="Plan-managed">Plan-managed</option>
+        <option value="NDIA-managed">NDIA-managed</option>
+      </select>
+    </div>
+    <div class="error-message" id="ndisPlanError">Please select an option</div>
+  </div>
+
+  <!-- Question 4: Location -->
+  <div class="question-section">
+    <label>Where are you located?</label>
+    <div class="options-container" id="locationContainer">
+      <div class="option-item" data-value="VIC">VIC</div>
+      <div class="option-item" data-value="NSW">NSW</div>
+      <div class="option-item" data-value="Other">Other</div>
+    </div>
+    <div id="locationOtherBox" style="display:none; margin-top:0.75rem;">
+      <input type="text" id="locationOther" placeholder="Please specify your location" class="other-input"/>
+    </div>
+    <div class="error-message" id="locationError">Please select your location</div>
+  </div>
+
+  <!-- Question 5: Timeframe -->
+  <div class="question-section">
+    <label>Preferred timeframe to begin services</label>
+    <div class="options-container" id="timeframeContainer">
+      <div class="option-item" data-value="Immediately">Immediately</div>
+      <div class="option-item" data-value="1-2 weeks">1-2 weeks</div>
+      <div class="option-item" data-value="1-2 months">1-2 months</div>
+      <div class="option-item" data-value="Just researching">Just researching</div>
+    </div>
+    <div class="error-message" id="timeframeError">Please select a timeframe</div>
+  </div>
+
+  <button type="submit" id="submitBtn" disabled>Submit Screening</button>
+</form>
+
+<!-- Banner -->
+<a href="https://cliniciq.com.au" target="_blank" class="banner">
+  <img src="/logo/logo.png" alt="ClinicIQ Logo">
+  <span>Automation by ClinicIQ Solutions</span>
+</a>
+
+<script>
+// Form elements
+const form = document.getElementById("screeningForm");
+const submitBtn = document.getElementById("submitBtn");
+const progressFill = document.getElementById("progressFill");
+const progressText = document.getElementById("progressText");
+
+// Option containers
+const ndisSupportContainer = document.getElementById("ndisSupportContainer");
+const supportTypeContainer = document.getElementById("supportTypeContainer");
+const ndisPlanContainer = document.getElementById("ndisPlanContainer");
+const locationContainer = document.getElementById("locationContainer");
+const timeframeContainer = document.getElementById("timeframeContainer");
+
+// Other input boxes
+const supportTypeOtherBox = document.getElementById("supportTypeOtherBox");
+const supportTypeOther = document.getElementById("supportTypeOther");
+const planManagementBox = document.getElementById("planManagementBox");
+const planManagement = document.getElementById("planManagement");
+const locationOtherBox = document.getElementById("locationOtherBox");
+const locationOther = document.getElementById("locationOther");
+
+// Error messages
+const errorMessages = {
+  ndisSupport: document.getElementById("ndisSupportError"),
+  supportType: document.getElementById("supportTypeError"),
+  ndisPlan: document.getElementById("ndisPlanError"),
+  location: document.getElementById("locationError"),
+  timeframe: document.getElementById("timeframeError")
+};
+
+// Store selected answers
+const answers = {
+  lookingForNDIS: null,
+  supportType: null,
+  ndisPlanStatus: null,
+  location: null,
+  timeframe: null
+};
+
+// Make option items clickable
+function makeOptionsClickable(container, questionKey) {
+  const options = container.querySelectorAll(".option-item");
+  options.forEach(option => {
+    option.addEventListener("click", () => {
+      // Clear previous selection in this container
+      options.forEach(opt => opt.classList.remove("selected"));
+
+      // Select clicked option
+      option.classList.add("selected");
+
+      // Store answer
+      answers[questionKey] = option.dataset.value;
+
+      // Handle special cases
+      handleSpecialCases(questionKey, option.dataset.value);
+
+      // Update progress
+      updateProgress();
+
+      // Clear error message for this question
+      if (errorMessages[questionKey]) {
+        errorMessages[questionKey].classList.remove("show");
+      }
+    });
+  });
+}
+
+// Handle special cases for conditional fields
+function handleSpecialCases(questionKey, value) {
+  switch(questionKey) {
+    case 'supportType':
+      if (value === 'Other') {
+        supportTypeOtherBox.style.display = "block";
+      } else {
+        supportTypeOtherBox.style.display = "none";
+        supportTypeOther.value = "";
+      }
+      break;
+
+    case 'ndisPlanStatus':
+      if (value === 'Yes') {
+        planManagementBox.style.display = "block";
+        // Make plan management required if NDIS plan exists
+        planManagement.setAttribute('required', 'required');
+      } else {
+        planManagementBox.style.display = "none";
+        planManagement.removeAttribute('required');
+        planManagement.value = "";
+        answers.planManagement = null;
+      }
+      break;
+
+    case 'location':
+      if (value === 'Other') {
+        locationOtherBox.style.display = "block";
+      } else {
+        locationOtherBox.style.display = "none";
+        locationOther.value = "";
+      }
+      break;
+  }
+}
+
+// Update progress bar and submit button
+function updateProgress() {
+  const totalQuestions = 5;
+  let answeredCount = 0;
+
+  // Count answered questions
+  if (answers.lookingForNDIS) answeredCount++;
+  if (answers.supportType) answeredCount++;
+  if (answers.ndisPlanStatus) answeredCount++;
+  if (answers.location) answeredCount++;
+  if (answers.timeframe) answeredCount++;
+
+  // Update progress bar
+  const percentage = (answeredCount / totalQuestions) * 100;
+  progressFill.style.width = percentage + "%";
+  progressText.textContent = `${answeredCount} of ${totalQuestions} questions answered`;
+
+  // Enable submit button if all questions answered
+  if (answeredCount === totalQuestions) {
+    submitBtn.disabled = false;
+  } else {
+    submitBtn.disabled = true;
+  }
+}
+
+// Validate form
+function validateForm() {
+  let isValid = true;
+
+  // Check each required question
+  if (!answers.lookingForNDIS) {
+    errorMessages.ndisSupport.classList.add("show");
+    isValid = false;
+  }
+
+  if (!answers.supportType) {
+    errorMessages.supportType.classList.add("show");
+    isValid = false;
+  }
+
+  if (!answers.ndisPlanStatus) {
+    errorMessages.ndisPlan.classList.add("show");
+    isValid = false;
+  }
+
+  if (!answers.location) {
+    errorMessages.location.classList.add("show");
+    isValid = false;
+  }
+
+  if (!answers.timeframe) {
+    errorMessages.timeframe.classList.add("show");
+    isValid = false;
+  }
+
+  // Check conditional required fields
+  if (answers.supportType === 'Other' && !supportTypeOther.value.trim()) {
+    alert("Please specify the other support type");
+    isValid = false;
+  }
+
+  if (answers.location === 'Other' && !locationOther.value.trim()) {
+    alert("Please specify your location");
+    isValid = false;
+  }
+
+  if (answers.ndisPlanStatus === 'Yes' && !planManagement.value) {
+    alert("Please select how your NDIS plan is managed");
+    isValid = false;
+  }
+
+  return isValid;
+}
+
+// Qualification logic
+function isQualified() {
+  return (
+    answers.lookingForNDIS === 'Yes' &&
+    (answers.location === 'VIC' || answers.location === 'NSW') &&
+    (answers.ndisPlanStatus === 'Yes' || answers.ndisPlanStatus === 'Not yet (still applying)')
+  );
+}
+
+// Encode data for URL parameters
+function encodeScreeningData() {
+  const data = {
+    ...answers,
+    supportTypeOther: supportTypeOther.value.trim(),
+    locationOther: locationOther.value.trim(),
+    planManagement: planManagement.value,
+    timestamp: new Date().toISOString()
+  };
+
+  // Convert to base64 for URL
+  return btoa(JSON.stringify(data));
+}
+
+// Form submission
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  if (!validateForm()) {
+    return;
+  }
+
+  // Check qualification
+  if (isQualified()) {
+    // Redirect to intake form with encoded data
+    const encodedData = encodeScreeningData();
+    window.location.href = `intake.html?data=${encodeURIComponent(encodedData)}`;
+  } else {
+    // Redirect to thank you page for unqualified users
+    window.location.href = "thank-you.html?qualified=false";
+  }
+});
+
+// Initialize option click handlers
+makeOptionsClickable(ndisSupportContainer, 'lookingForNDIS');
+makeOptionsClickable(supportTypeContainer, 'supportType');
+makeOptionsClickable(ndisPlanContainer, 'ndisPlanStatus');
+makeOptionsClickable(locationContainer, 'location');
+makeOptionsClickable(timeframeContainer, 'timeframe');
+
+// Handle other input changes
+supportTypeOther.addEventListener('input', () => {
+  answers.supportTypeOther = supportTypeOther.value.trim();
+});
+
+locationOther.addEventListener('input', () => {
+  answers.locationOther = locationOther.value.trim();
+});
+
+planManagement.addEventListener('change', () => {
+  answers.planManagement = planManagement.value;
+});
+</script>
+
+</body>
+</html>

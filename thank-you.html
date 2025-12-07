@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>Thank You - NDIS Support Services</title>
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <link rel="icon" type="image/png" href="/logo/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+      background: #FFFFFF;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 1rem;
+      flex-direction: column;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Responsive body padding */
+    @media (max-width: 320px) {
+      body {
+        padding: 1rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body {
+        padding: 1.25rem 1rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      body {
+        padding: 1.5rem;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      body {
+        padding: 2rem;
+      }
+    }
+
+    .container {
+      background: #F8FAFC;
+      padding: 3rem;
+      border-radius: 1.75rem;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
+      width: 100%;
+      max-width: 500px;
+      text-align: center;
+      border: 1px solid #E2E8F0;
+      position: relative;
+    }
+
+    /* Responsive container styling */
+    @media (max-width: 480px) {
+      .container {
+        padding: 2rem;
+        border-radius: 1rem;
+        max-width: calc(100vw - 2rem);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .container {
+        padding: 3.5rem;
+        max-width: 550px;
+      }
+    }
+
+    h2 {
+      margin-bottom: 1.5rem;
+      color: #1E293B;
+      font-weight: 400;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+      color: #374151;
+      font-weight: 500;
+      font-size: 1.125rem;
+    }
+
+    .logo {
+      display: block;
+      margin: 0 auto 2rem auto;
+      max-width: 150px;
+      max-height: 50px;
+      object-fit: contain;
+    }
+
+    .message {
+      font-size: 1.125rem;
+      color: #475569;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .highlight {
+      color: #2563EB;
+      font-weight: 500;
+    }
+
+    .contact-info {
+      background: #EFF6FF;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      margin: 2rem 0;
+      border: 1px solid #DBEAFE;
+    }
+
+    .contact-info h4 {
+      margin-top: 0;
+      margin-bottom: 0.75rem;
+      color: #1E40AF;
+      font-weight: 500;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      margin: 0.5rem 0;
+      font-size: 0.875rem;
+      color: #374151;
+    }
+
+    button {
+      margin-top: 1rem;
+      padding: 0.875rem 2rem;
+      border: none;
+      border-radius: 6.25rem;
+      background: #3B82F6;
+      color: #FFFFFF;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 48px;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+      letter-spacing: 0.1px;
+      text-transform: uppercase;
+    }
+
+    button:hover {
+      background: #2563EB;
+      box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+      transform: scale(1.02);
+    }
+
+    button:active {
+      background: #1D4ED8;
+      box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+    }
+
+    /* Back Button */
+    .back-button {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: #3B82F6;
+      color: #FFFFFF;
+      border: none;
+      border-radius: 6.25rem;
+      padding: 0.5rem 0.75rem;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      min-height: 40px;
+      box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .back-button:hover {
+      background: #2563EB;
+      box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+      transform: scale(1.02);
+    }
+
+    /* Buttons container */
+    .buttons-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    @media (min-width: 768px) {
+      .buttons-container {
+        flex-direction: row;
+        justify-content: center;
+      }
+    }
+
+    .btn-secondary {
+      background: #6B7280;
+    }
+
+    .btn-secondary:hover {
+      background: #4B5563;
+    }
+
+    /* Banner */
+    .banner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 350px;
+      padding: 0.5rem 1rem;
+      background: #EFF6FF;
+      color: #1E293B;
+      border: 1px solid #DBEAFE;
+      border-radius: 1rem;
+      text-decoration: none;
+      font-family: "Ubuntu", monospace;
+      font-weight: 400;
+      font-size: 12px;
+      gap: 0.5rem;
+      margin-top: 2rem;
+      transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+      min-height: 44px;
+    }
+
+    .banner:hover {
+      background: #DBEAFE;
+      border-color: #3B82F6;
+      transform: scale(1.02);
+    }
+
+    .banner img {
+      height: 24px;
+      width: auto;
+    }
+
+    /* Icon styles */
+    .icon {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      margin-right: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <a href="index.html" class="back-button">← Back</a>
+  <img src="/logo/cliniciq-logo.webp" alt="Company Logo" class="logo">
+
+  <h2>Thank You</h2>
+
+  <div class="message" id="mainMessage">
+    Thank you for your interest in our NDIS support services.
+  </div>
+
+  <div class="message" id="specificMessage">
+    <!-- Message will be updated based on qualification status -->
+  </div>
+
+  <h3>How We Can Help</h3>
+  <div class="message">
+    If you're not yet eligible for NDIS support, we'd be happy to:
+    <ul style="text-align: left; max-width: 400px; margin: 1rem auto;">
+      <li>Answer questions about the NDIS application process</li>
+      <li>Provide information about available services</li>
+      <li>Connect you with NDIS planning resources</li>
+      <li>Keep you updated on our service areas</li>
+    </ul>
+  </div>
+
+  <div class="contact-info">
+    <h4>Contact Us</h4>
+    <div class="contact-item">
+      <span class="icon">📞</span>
+      <span>1800 CLINIQ (254647)</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">✉️</span>
+      <span>support@cliniciq.com.au</span>
+    </div>
+    <div class="contact-item">
+      <span class="icon">🌐</span>
+      <span>www.cliniciq.com.au</span>
+    </div>
+  </div>
+
+  <div class="buttons-container">
+    <button onclick="location.href='screening.html'">Try Screening Again</button>
+    <button class="btn-secondary" onclick="location.href='index.html'">Back to Home</button>
+  </div>
+</div>
+
+<!-- Banner -->
+<a href="https://cliniciq.com.au" target="_blank" class="banner">
+  <img src="/logo/logo.png" alt="ClinicIQ Logo">
+  <span>Automation by ClinicIQ Solutions</span>
+</a>
+
+<script>
+// Parse URL parameters to determine if user was qualified or not
+function parseUrlParams() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const qualified = urlParams.get('qualified');
+
+  const mainMessage = document.getElementById('mainMessage');
+  const specificMessage = document.getElementById('specificMessage');
+
+  if (qualified === 'false') {
+    // User was not qualified
+    mainMessage.innerHTML = 'Thank you for your enquiry.';
+    specificMessage.innerHTML = `
+      <p>Based on your responses, our services may not be the best fit at this time.</p>
+      <p><span class="highlight">Once your NDIS plan is approved</span>, we would be happy to provide support services. Please contact us anytime for assistance.</p>
+    `;
+  } else {
+    // Default message (e.g., direct access to this page)
+    mainMessage.innerHTML = 'Thank you for your interest in ClinicIQ.';
+    specificMessage.innerHTML = `
+      <p>We're here to help you navigate your NDIS journey.</p>
+      <p>Please complete our <a href="screening.html" style="color: #2563EB; text-decoration: underline;">screening questionnaire</a> to check your eligibility.</p>
+    `;
+  }
+}
+
+// Initialize page
+document.addEventListener('DOMContentLoaded', parseUrlParams);
+</script>
+
+</body>
+</html>

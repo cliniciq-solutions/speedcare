@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>NDIS Intake Form</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<link rel="icon" type="image/png" href="/logo/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap" rel="stylesheet">
+<style>
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 1rem;
+    flex-direction: column;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Enhanced responsive body padding */
+  @media (max-width: 320px) {
+    body {
+      padding: 1rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    body {
+      padding: 1.25rem 1rem;
+    }
+  }
+
+  @media (min-width: 768px) {
+    body {
+      padding: 1.5rem;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    body {
+      padding: 2rem;
+    }
+  }
+
+  form {
+    background: #F8FAFC;
+    padding: 2rem;
+    border-radius: 1.75rem;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
+    width: 100%;
+    max-width: 600px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 1px solid #E2E8F0;
+    position: relative;
+  }
+
+  /* Enhanced responsive form styling */
+  @media (max-width: 480px) {
+    form {
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      border-radius: 1rem;
+      max-width: calc(100vw - 2rem);
+      margin-left: auto;
+      margin-right: auto;
+    }
+  }
+
+  @media (min-width: 768px) {
+    form {
+      padding: 2.5rem;
+      margin-bottom: 2.5rem;
+      max-width: 700px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    form {
+      padding: 3rem;
+      margin-bottom: 3rem;
+      max-width: 800px;
+    }
+  }
+
+  h2 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #1E293B;
+    font-weight: 400;
+    font-size: 1.5rem;
+    letter-spacing: 0;
+  }
+
+  h3 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #374151;
+    font-weight: 500;
+    font-size: 1.125rem;
+    text-align: left;
+    border-bottom: 2px solid #E5E7EB;
+    padding-bottom: 0.5rem;
+  }
+
+  .logo {
+    display: block;
+    margin: 0 auto 1rem auto;
+    max-width: 150px;
+    max-height: 50px;
+    object-fit: contain;
+  }
+
+  label {
+    display: block;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #475569;
+    letter-spacing: 0.1px;
+    text-align: left;
+  }
+
+  .required {
+    color: #DC2626;
+  }
+
+  input, select, textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-top: 0.4rem;
+    border: 1px solid #94A3B8;
+    border-radius: 0.75rem;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    background: #FFFFFF;
+    color: #1E293B;
+    font-family: 'Ubuntu', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+  }
+
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3B82F6;
+    border-width: 2px;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.1);
+  }
+
+  textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  /* Responsive input padding */
+  @media (max-width: 480px) {
+    input, select, textarea {
+      padding: 0.875rem;
+      font-size: 16px; /* Prevent zoom on iOS */
+    }
+  }
+
+  /* Checkbox and radio styling */
+  .checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .checkbox-item input[type="checkbox"] {
+    width: auto;
+    height: 18px;
+    margin: 0;
+  }
+
+  .radio-group {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .radio-item input[type="radio"] {
+    width: auto;
+    height: 18px;
+    margin: 0;
+  }
+
+  /* Clickable pills for multi-select */
+  .pills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .pill {
+    padding: 0.625rem 1rem;
+    border: 2px solid #E2E8F0;
+    border-radius: 1rem;
+    cursor: pointer;
+    user-select: none;
+    background: #FFFFFF;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 500;
+    text-align: center;
+    color: #64748B;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  }
+
+  .pill:hover {
+    background: #F8FAFC;
+    border-color: #CBD5E1;
+    color: #475569;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .pill.selected {
+    background: linear-gradient(135deg, #3B82F6 0%, #2563EB 100%);
+    color: #FFFFFF;
+    border-color: #1D4ED8;
+    font-weight: 600;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(59, 130, 246, 0.4);
+    border: 2px solid transparent;
+  }
+
+  button {
+    margin-top: 1.5rem;
+    padding: 0.875rem;
+    width: 100%;
+    border: none;
+    border-radius: 6.25rem;
+    background: #3B82F6;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: 48px;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+    letter-spacing: 0.1px;
+    text-transform: uppercase;
+  }
+
+  /* Responsive button padding */
+  @media (max-width: 480px) {
+    button {
+      padding: 1rem;
+      margin-top: 1.25rem;
+      min-height: 48px;
+    }
+  }
+
+  button:hover {
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+    transform: scale(1.02);
+  }
+
+  button:active {
+    background: #1D4ED8;
+    box-shadow: 0 2px 4px rgba(59,130,246,0.2);
+  }
+
+  button:disabled {
+    background: #CBD5E1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  /* Secondary button */
+  .btn-secondary {
+    background: #6B7280;
+    margin-right: 1rem;
+  }
+
+  .btn-secondary:hover {
+    background: #4B5563;
+  }
+
+  /* Buttons container */
+  .buttons-container {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  @media (max-width: 480px) {
+    .buttons-container {
+      flex-direction: column;
+    }
+    .btn-secondary {
+      margin-right: 0;
+      margin-bottom: 1rem;
+    }
+  }
+
+  /* Modal Styles */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+  }
+
+  .modal-content {
+    background: #FFFFFF;
+    margin: 10% auto;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    max-width: 700px;
+    position: relative;
+    font-size: 14px;
+    text-align: center;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.2), 0 1px 3px 1px rgba(59,130,246,0.1);
+    border: 1px solid #E2E8F0;
+  }
+
+  /* Responsive modal padding */
+  @media (max-width: 480px) {
+    .modal-content {
+      margin: 5% auto;
+      padding: 1.5rem;
+      max-width: calc(100vw - 1.75rem);
+      border-radius: 1.25rem;
+    }
+  }
+
+  .close {
+    position: absolute;
+    right: 1rem; top: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  /* Back Button */
+  .back-button {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: #3B82F6;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 6.25rem;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-height: 40px;
+    box-shadow: 0 1px 2px rgba(59,130,246,0.3), 0 1px 3px 1px rgba(59,130,246,0.15);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .back-button:hover {
+    background: #2563EB;
+    box-shadow: 0 4px 8px rgba(59,130,246,0.25), 0 2px 4px rgba(59,130,246,0.3);
+    transform: scale(1.02);
+  }
+
+  /* Pre-filled data indicator */
+  .prefilled {
+    background: #F0F9FF;
+    border-color: #3B82F6;
+    padding-left: 2.5rem;
+    position: relative;
+  }
+
+  .prefilled::before {
+    content: "✓";
+    position: absolute;
+    left: 0.75rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #3B82F6;
+    font-weight: bold;
+  }
+
+  /* Save progress button */
+  .save-progress-btn {
+    background: #10B981;
+    padding: 0.5rem 1rem;
+    font-size: 0.75rem;
+    margin-top: 0.5rem;
+    width: auto;
+  }
+
+  .save-progress-btn:hover {
+    background: #059669;
+  }
+
+  /* Banner */
+  .banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 350px;
+    padding: 0.5rem 1rem;
+    background: #EFF6FF;
+    color: #1E293B;
+    border: 1px solid #DBEAFE;
+    border-radius: 1rem;
+    text-decoration: none;
+    font-family: "Ubuntu", monospace;
+    font-weight: 400;
+    font-size: 12px;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+    min-height: 44px;
+  }
+
+  .banner:hover {
+    background: #DBEAFE;
+    border-color: #3B82F6;
+    transform: scale(1.02);
+  }
+
+  .banner img {
+    height: 24px;
+    width: auto;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    border: 4px solid #DBEAFE;
+    border-top: 4px solid #3B82F6;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+
+  @keyframes spin { 100% { transform: rotate(360deg); } }
+
+  /* Success message */
+  .success-message {
+    background: #F0FDF4;
+    border: 1px solid #86EFAC;
+    color: #166534;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin: 1rem 0;
+  }
+
+  /* Error message */
+  .error-message {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    color: #DC2626;
+    padding: 1rem;
+    border-radius: 0.75rem;
+    margin: 1rem 0;
+  }
+</style>
+</head>
+<body>
+
+<form id="intakeForm">
+  <a href="index.html" class="back-button">← Back</a>
+  <img src="/logo/cliniciq-logo.webp" alt="Company Logo" class="logo">
+
+  <h2>NDIS Intake Form</h2>
+
+  <!-- Participant Details Section -->
+  <h3>Participant Details</h3>
+
+  <label>NDIS Number <span class="required">*</span></label>
+  <input type="text" name="ndisNumber" placeholder="Enter your 9-digit NDIS number" required maxlength="9" pattern="[0-9]{9}"/>
+
+  <label>First Name <span class="required">*</span></label>
+  <input type="text" name="firstName" placeholder="Enter first name" required/>
+
+  <label>Surname <span class="required">*</span></label>
+  <input type="text" name="surname" placeholder="Enter surname" required/>
+
+  <label>Date of Birth <span class="required">*</span></label>
+  <input type="date" name="dob" required/>
+
+  <label>Preferred Language</label>
+  <select name="language">
+    <option value="">Select language</option>
+    <option value="English">English</option>
+    <option value="Mandarin">Mandarin</option>
+    <option value="Cantonese">Cantonese</option>
+    <option value="Arabic">Arabic</option>
+    <option value="Vietnamese">Vietnamese</option>
+    <option value="Italian">Italian</option>
+    <option value="Greek">Greek</option>
+    <option value="Spanish">Spanish</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Home Address <span class="required">*</span></label>
+  <textarea name="address" placeholder="Enter full address" required></textarea>
+
+  <label>Email <span class="required">*</span></label>
+  <input type="email" name="email" placeholder="you@example.com" required/>
+
+  <label>Contact Number <span class="required">*</span></label>
+  <input type="tel" name="phone" placeholder="04XX XXX XXX" required pattern="[0-9]{10}"/>
+
+  <!-- Disability Information Section -->
+  <h3>Disability Information</h3>
+
+  <label>Primary Diagnosis/Disability <span class="required">*</span></label>
+  <textarea name="diagnosis" placeholder="Please describe primary diagnosis or disability" required></textarea>
+
+  <label>Behaviour Support Plan</label>
+  <div class="radio-group">
+    <div class="radio-item">
+      <input type="radio" id="bspYes" name="behaviourSupportPlan" value="Yes">
+      <label for="bspYes">Yes</label>
+    </div>
+    <div class="radio-item">
+      <input type="radio" id="bspNo" name="behaviourSupportPlan" value="No">
+      <label for="bspNo">No</label>
+    </div>
+  </div>
+
+  <label>Personal Care Needs</label>
+  <div class="pills-container" id="personalCareContainer">
+    <div class="pill" data-value="Showering">Showering</div>
+    <div class="pill" data-value="Dressing">Dressing</div>
+    <div class="pill" data-value="Toileting">Toileting</div>
+    <div class="pill" data-value="Meals">Meals</div>
+    <div class="pill" data-value="Mobility">Mobility</div>
+    <div class="pill" data-value="Medication">Medication</div>
+  </div>
+
+  <label>Mobility Requirements</label>
+  <select name="mobility">
+    <option value="">Select mobility level</option>
+    <option value="Independent">Independent</option>
+    <option value="Walking aid">Walking aid</option>
+    <option value="Wheelchair">Wheelchair</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <!-- NDIS Plan Details Section -->
+  <h3>NDIS Plan Details</h3>
+
+  <label>Plan Management Type <span class="required">*</span></label>
+  <select name="planManagementType" required>
+    <option value="">Select management type</option>
+    <option value="Self-managed">Self-managed</option>
+    <option value="Plan-managed">Plan-managed</option>
+    <option value="NDIA-managed">NDIA-managed</option>
+  </select>
+
+  <label>Plan Start Date</label>
+  <input type="date" name="planStartDate"/>
+
+  <label>Plan End Date</label>
+  <input type="date" name="planEndDate"/>
+
+  <label>Core Funding Amount (optional)</label>
+  <input type="number" name="coreFunding" placeholder="Enter amount"/>
+
+  <label>Capacity Building Funding (optional)</label>
+  <input type="number" name="capacityBuildingFunding" placeholder="Enter amount"/>
+
+  <label>Support Coordinator Name/Contact (optional)</label>
+  <input type="text" name="supportCoordinator" placeholder="Name and contact details"/>
+
+  <!-- Support Person/Guardian Section -->
+  <h3>Support Person / Guardian</h3>
+
+  <label>Guardian Name (if applicable)</label>
+  <input type="text" name="guardianName" placeholder="Full name"/>
+
+  <label>Relationship</label>
+  <select name="guardianRelationship">
+    <option value="">Select relationship</option>
+    <option value="Parent">Parent</option>
+    <option value="Guardian">Guardian</option>
+    <option value="Carer">Carer</option>
+    <option value="Other">Other</option>
+  </select>
+
+  <label>Guardian Phone</label>
+  <input type="tel" name="guardianPhone" placeholder="Contact number" pattern="[0-9]{10}"/>
+
+  <label>Guardian Email</label>
+  <input type="email" name="guardianEmail" placeholder="Email address"/>
+
+  <!-- Service Preferences Section -->
+  <h3>Service Preferences</h3>
+
+  <label>Preferred Start Date <span class="required">*</span></label>
+  <input type="date" name="preferredStartDate" required/>
+
+  <label>Service Frequency</label>
+  <select name="serviceFrequency">
+    <option value="">Select frequency</option>
+    <option value="One-time">One-time</option>
+    <option value="Weekly">Weekly</option>
+    <option value="Fortnightly">Fortnightly</option>
+    <option value="Monthly">Monthly</option>
+    <option value="As needed">As needed</option>
+  </select>
+
+  <label>Preferred Service Times</label>
+  <div class="pills-container" id="serviceTimesContainer">
+    <div class="pill" data-value="Morning">Morning</div>
+    <div class="pill" data-value="Afternoon">Afternoon</div>
+    <div class="pill" data-value="Evening">Evening</div>
+    <div class="pill" data-value="Weekends">Weekends</div>
+  </div>
+
+  <label>Support Worker Preferences (optional)</label>
+  <textarea name="supportWorkerPreferences" placeholder="e.g., gender preference, language, etc."></textarea>
+
+  <label>Special Requirements (optional)</label>
+  <textarea name="specialRequirements" placeholder="e.g., medical needs, equipment, accessibility requirements"></textarea>
+
+  <!-- Buttons -->
+  <button type="button" class="save-progress-btn" onclick="saveProgress()">Save Progress</button>
+
+  <div class="buttons-container">
+    <button type="submit">Submit Form</button>
+  </div>
+</form>
+
+<!-- Modal -->
+<div id="resultModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <div id="modalBody">
+      <div class="spinner"></div>
+      <p>Processing your application... please wait.</p>
+    </div>
+  </div>
+</div>
+
+<!-- Banner -->
+<a href="https://cliniciq.com.au" target="_blank" class="banner">
+  <img src="/logo/logo.png" alt="ClinicIQ Logo">
+  <span>Automation by ClinicIQ Solutions</span>
+</a>
+
+<script>
+// Form elements
+const form = document.getElementById("intakeForm");
+const modal = document.getElementById("resultModal");
+const modalBody = document.getElementById("modalBody");
+const closeBtn = document.querySelector(".close");
+
+// Screening data from URL
+let screeningData = null;
+
+// Load screening data from URL parameters
+function loadScreeningData() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const dataParam = urlParams.get('data');
+
+  if (dataParam) {
+    try {
+      screeningData = JSON.parse(atob(dataParam));
+      console.log('Loaded screening data:', screeningData);
+      preFillForm();
+    } catch (error) {
+      console.error('Error parsing screening data:', error);
+    }
+  }
+}
+
+// Pre-fill form with screening data
+function preFillForm() {
+  if (!screeningData) return;
+
+  // Pre-fill based on screening responses
+  if (screeningData.supportType && screeningData.supportType !== 'Other') {
+    // Could pre-populate diagnosis field based on support type
+    const supportTypeMapping = {
+      'In-home personal care': 'Personal care support needs',
+      'Community access / skill building': 'Community participation and skill development',
+      'Behaviour support': 'Behaviour support requirements',
+      'Supported independent living': 'Independent living support'
+    };
+
+    if (supportTypeMapping[screeningData.supportType]) {
+      const diagnosisField = form.querySelector('textarea[name="diagnosis"]');
+      if (diagnosisField && !diagnosisField.value) {
+        diagnosisField.value = supportTypeMapping[screeningData.supportType];
+        diagnosisField.classList.add('prefilled');
+      }
+    }
+  }
+
+  // Set preferred timeframe as service frequency
+  if (screeningData.timeframe) {
+    const timeframeMapping = {
+      'Immediately': 'Weekly',
+      '1-2 weeks': 'Weekly',
+      '1-2 months': 'Fortnightly',
+      'Just researching': 'As needed'
+    };
+
+    const frequencyField = form.querySelector('select[name="serviceFrequency"]');
+    if (frequencyField && !frequencyField.value && timeframeMapping[screeningData.timeframe]) {
+      frequencyField.value = timeframeMapping[screeningData.timeframe];
+      frequencyField.classList.add('prefilled');
+    }
+  }
+
+  // Set plan management type if available
+  if (screeningData.planManagement) {
+    const planMgmtField = form.querySelector('select[name="planManagementType"]');
+    if (planMgmtField && !planMgmtField.value) {
+      planMgmtField.value = screeningData.planManagement;
+      planMgmtField.classList.add('prefilled');
+    }
+  }
+}
+
+// Make pills clickable
+function makePillsClickable(container) {
+  const pills = container.querySelectorAll(".pill");
+  pills.forEach(pill => {
+    pill.addEventListener("click", () => {
+      pill.classList.toggle("selected");
+    });
+  });
+}
+
+// Collect selected pills
+function collectSelectedPills(containerId) {
+  const container = document.getElementById(containerId);
+  const selectedPills = container.querySelectorAll(".pill.selected");
+  return Array.from(selectedPills).map(pill => pill.dataset.value);
+}
+
+// Convert timestamp to Australian format
+function toAustralianTimestamp(ts) {
+  const date = new Date(ts);
+  return date.toLocaleString("en-AU", {
+    timeZone: "Australia/Sydney",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true
+  });
+}
+
+// Save progress to local storage
+function saveProgress() {
+  const formData = new FormData(form);
+  const data = Object.fromEntries(formData.entries());
+
+  // Add pill selections
+  data.personalCareNeeds = collectSelectedPills('personalCareContainer');
+  data.serviceTimes = collectSelectedPills('serviceTimesContainer');
+
+  // Save to local storage
+  localStorage.setItem('ndisIntakeProgress', JSON.stringify(data));
+
+  // Show confirmation
+  const btn = event.target;
+  const originalText = btn.textContent;
+  btn.textContent = 'Saved!';
+  btn.style.background = '#10B981';
+
+  setTimeout(() => {
+    btn.textContent = originalText;
+    btn.style.background = '';
+  }, 2000);
+}
+
+// Load saved progress
+function loadSavedProgress() {
+  const saved = localStorage.getItem('ndisIntakeProgress');
+  if (saved) {
+    try {
+      const data = JSON.parse(saved);
+
+      // Fill form fields
+      Object.keys(data).forEach(key => {
+        const field = form.querySelector(`[name="${key}"]`);
+        if (field) {
+          if (field.type === 'checkbox' || field.type === 'radio') {
+            // Handle radio/checkbox
+            const radio = form.querySelector(`[name="${key}"][value="${data[key]}"]`);
+            if (radio) radio.checked = true;
+          } else {
+            field.value = data[key];
+          }
+        }
+      });
+
+      // Restore pill selections
+      if (data.personalCareNeeds) {
+        const container = document.getElementById('personalCareContainer');
+        data.personalCareNeeds.forEach(value => {
+          const pill = container.querySelector(`[data-value="${value}"]`);
+          if (pill) pill.classList.add('selected');
+        });
+      }
+
+      if (data.serviceTimes) {
+        const container = document.getElementById('serviceTimesContainer');
+        data.serviceTimes.forEach(value => {
+          const pill = container.querySelector(`[data-value="${value}"]`);
+          if (pill) pill.classList.add('selected');
+        });
+      }
+    } catch (error) {
+      console.error('Error loading saved progress:', error);
+    }
+  }
+}
+
+// Load configuration from serverless function
+let config = null;
+
+async function loadConfig() {
+  try {
+    console.log('Loading config from /api/config...');
+    const response = await fetch('/api/config');
+    console.log('Config response status:', response.status);
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    config = await response.json();
+    console.log('Config loaded successfully:', config);
+
+    // Check if webhooks are available
+    if (!config.surveyWebhook || !config.eligibilityWebhook) {
+      console.warn('Webhook URLs not available in config:', config);
+    }
+  } catch (error) {
+    console.error('Could not load config from server:', error);
+    console.log('Config service unavailable - webhook URLs not accessible');
+
+    // Config service unavailable - cannot proceed without webhook URLs
+    console.log('Config service unavailable - webhook access requires serverless functions');
+    config = {
+      error: 'Configuration service unavailable - upgrade Netlify plan for serverless functions',
+      fallbackUsed: false
+    };
+  }
+}
+
+// Form submission
+document.getElementById("intakeForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+
+  // Ensure config is loaded
+  if (!config) {
+    await loadConfig();
+  }
+
+  // Check if webhook URL is available
+  if (!config || !config.eligibilityWebhook || config.error) {
+    console.error("Config issue:", config);
+    alert("Service temporarily unavailable. Please check your network connection and try again later.");
+    return;
+  }
+
+  console.log("Using intake webhook:", config.eligibilityWebhook);
+
+  const formData = Object.fromEntries(new FormData(e.target).entries());
+
+  // Add pill selections
+  formData.personalCareNeeds = collectSelectedPills('personalCareContainer');
+  formData.serviceTimes = collectSelectedPills('serviceTimesContainer');
+
+  // Add screening data if available
+  if (screeningData) {
+    formData.screening = screeningData;
+  }
+
+  formData.timestamp = toAustralianTimestamp(new Date());
+  formData.formType = "ndis_intake";
+
+  modal.style.display = "block";
+  modalBody.innerHTML = `<div class="spinner"></div><p>Processing your application... please wait.</p>`;
+
+  console.log("Sending form data:", formData);
+
+  // Use the same webhook endpoint as eligibility
+  const requestHeaders = {
+    "Content-Type": "application/json",
+    "ndisintake": "1" // Custom header to identify intake form submissions
+  };
+
+  try {
+    const response = await fetch(config.eligibilityWebhook, {
+      method: "POST",
+      headers: requestHeaders,
+      body: JSON.stringify(formData)
+    });
+
+    console.log("Response status:", response.status);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error("Response error:", response.status, response.statusText, errorText);
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
+
+    let data = await response.json();
+    console.log("Webhook response:", data);
+
+    // Clear saved progress
+    localStorage.removeItem('ndisIntakeProgress');
+
+    // Show success message
+    modalBody.innerHTML = `
+      <div class="success-message">
+        <h3>Application Submitted Successfully!</h3>
+        <p>Thank you for completing the NDIS intake form.</p>
+        <p>We have received your application and will contact you within 2 business days.</p>
+        <p><strong>Reference ID:</strong> ${Date.now()}</p>
+      </div>
+      <p>You can now close this window.</p>
+    `;
+
+  } catch (err) {
+    console.error("Error submitting form:", err);
+    modalBody.innerHTML = `
+      <div class="error-message">
+        <h3>Submission Error</h3>
+        <p>There was an error submitting your application.</p>
+        <p>${err.message}</p>
+      </div>
+      <button onclick="location.reload()">Try Again</button>
+    `;
+  }
+});
+
+// Modal close
+closeBtn.onclick = () => modal.style.display = "none";
+window.onclick = (event) => { if (event.target == modal) modal.style.display = "none"; }
+
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+  loadScreeningData();
+  loadSavedProgress();
+  makePillsClickable('personalCareContainer');
+  makePillsClickable('serviceTimesContainer');
+  loadConfig();
+});
+
+// Auto-save progress every 30 seconds
+setInterval(saveProgress, 30000);
+</script>
+
+</body>
+</html>
